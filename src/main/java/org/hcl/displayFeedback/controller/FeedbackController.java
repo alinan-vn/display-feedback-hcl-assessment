@@ -1,6 +1,6 @@
 package org.hcl.displayFeedback.controller;
 
-import java.util.List;
+//import java.util.List;
 
 import org.hcl.displayFeedback.entity.FeedbackEntity;
 
@@ -23,9 +23,8 @@ public class FeedbackController {
 	private FeedbackEntityCrudRepository feedbackEntityCrudRepository;
 	
 	@GetMapping
-//	public List<FeedbackEntity> listFeedback(){
 	public Iterable<FeedbackEntity> listFeedback(){
-//		return feedbackEntityCrudRepository.findAll(); --> some cast would be needed here if used List, instead of iterable
+
 		return feedbackEntityCrudRepository.findAll();
 	}
 	
