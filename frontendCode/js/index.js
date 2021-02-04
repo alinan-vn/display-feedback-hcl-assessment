@@ -1,27 +1,29 @@
 window.onload=function(){
-    const clickyBtn = document.querySelector(".clicky");
-    const unList = document.querySelector(".unordered-list");
+    const feedbackURL = "http://localhost:8083/feedback"
+    const feedbackFormBtn = document.querySelector(".submit-feedback")
 
-    clickyBtn.addEventListener('click', addListItem);
+    feedbackFormBtn.addEventListener('click', postFeedback)
 
+    function postFeedback() {
+        let feedbackData = { description: "", rating: 0}
 
-    
-    let counter = 1;
-    function addListItem() {
-        counter++
-        const text = document.createTextNode(`Item ${counter}`)
-        const li = document.createElement("li");
+        const descriptionInput = document.querySelector(".description")
+        const ratingInput = document.querySelector(".rating")
+        feedbackData.description = descriptionInput.value
+        feedbackData.rating = ratingInput.value
 
-        li.appendChild(text)
-        unList.appendChild(li)
-        
+        const postForm = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(feedbackData)
+        }
+
+        fetch(feedbackURL, postForm)
+            .then(r => r.json())
+            .then(data => console.log(data))
     }
-
-
-
-
-
-
 
 }
 
